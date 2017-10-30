@@ -35,7 +35,18 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 						.reduce(BigDecimal::add).orElse(BigDecimal.ZERO));
 		resultat.setTotalRetenueSalarial(totalRetenueSalariale);
 		
+		String totalRetenuePatronale = paieUtils.formaterBigDecimal(
+				bulletin.getRemunerationEmploye().getProfilRemuneration().getCotisationsNonImposables().stream()
+						.filter(cotisation -> cotisation.getTauxPatronal()!=null)
+						.map(cotisation -> cotisation.getTauxPatronal().multiply(new BigDecimal(salaireBrut)))
+						.reduce(BigDecimal::add).orElse(BigDecimal.ZERO));
+		resultat.setTotalCotisationsPatronales(totalRetenuePatronale);
 		
+		String netImposable = paieUtils.formaterBigDecimal(new BigDecimal(salaireBrut).subtract(new BigDecimal(totalRetenueSalariale)));
+		resultat.setNetImposable(netImposable);
+		
+		String netAPayer = paieUtils.formaterBigDecimal(new BigDecimal(netImposable).subtract(bulletin.getRemunerationEmploye().getProfilRemuneration().getCotisationsImposables().stream().filter(cotisation -> cotisation.getTauxSalarial()!=null).map(cotisation -> cotisation.getTauxSalarial().multiply(new BigDecimal(salaireBrut))).reduce(BigDecimal::add).orElse(BigDecimal.ZERO)));
+		resultat.setNetAPayer(netAPayer);
 		
 		return resultat;
 	}
