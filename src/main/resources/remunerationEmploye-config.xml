@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="remunerationEmploye1" class="dev.paie.entite.RemunerationEmploye">
+	<property name="matricule" value="M01"></property>
+	<property name="entreprise" ref="entreprise1"></property>
+	<property name="profilRemuneration" ref="profilRemuneration1"></property>
+	<!--Test autre méthode au lieu d'importer un fichier -->
+	<property name="grade">
+		<bean id="grade1" class="dev.paie.entite.Grade">
+			<property name="nbHeuresBase" value="151.67"></property>
+			<property name="tauxBase" value="11.0984"></property>
+		</bean>
+	</property>
+	</bean>
+	<import resource="entreprise-config.xml"/>
+	<import resource="profilRemuneration-config.xml"/>
+</beans>
