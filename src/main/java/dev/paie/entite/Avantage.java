@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -23,6 +26,10 @@ public class Avantage {
 	private String nom;
 	@Column
 	private BigDecimal montant;
+	
+	public Avantage() {
+		
+	}
 
 	@Override
     public boolean equals(Object obj) {

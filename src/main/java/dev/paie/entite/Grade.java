@@ -19,6 +19,10 @@ public class Grade {
 	@Column
 	private BigDecimal tauxBase;
 	
+	public Grade() {
+
+	}
+	
 	public String getCode() {
 		return code;
 	}

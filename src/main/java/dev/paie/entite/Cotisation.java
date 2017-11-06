@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
@@ -26,6 +29,10 @@ public class Cotisation {
 	private BigDecimal tauxSalarial;
 	@Column(name="TauxPatronal")
 	private BigDecimal tauxPatronal;
+	
+	public Cotisation() {
+
+	}
 	
 	@Override
     public boolean equals(Object obj) {

@@ -22,6 +22,10 @@ public class Entreprise {
 	@Column
 	private String codeNaf;
 	
+	public Entreprise() {
+
+	}
+	
 	public String getDenomination() {
 		return denomination;
 	}

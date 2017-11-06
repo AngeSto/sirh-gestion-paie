@@ -9,6 +9,10 @@ public class ResultatCalculRemuneration {
 	private String netImposable;
 	private String netAPayer;
 	
+	public ResultatCalculRemuneration() {
+
+	}
+	
 	/**Getter for salaireDeBase
 	 * @return salaireDeBase
 	 */
