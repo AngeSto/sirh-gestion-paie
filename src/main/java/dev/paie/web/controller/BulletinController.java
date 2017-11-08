@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ public class BulletinController {
 	CalculerRemunerationService remunerationService;
 
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public ModelAndView creerBulletin() {
 		List<Periode> periodes = periodeRepository.findAll();
 		List<RemunerationEmploye> employes = remunerationEmployeRepository.findAll();
@@ -49,6 +51,7 @@ public class BulletinController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public String submitForm(@RequestParam("periode") Integer periode,
 			@RequestParam("remunerationEmploye.matricule") String matricule,
 			@RequestParam("primeExceptionnelle") Double prime) {
@@ -63,6 +66,7 @@ public class BulletinController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/liste")
+	@Secured({"ROLE_ADMINISTRATEUR", "ROLE_UTILISATEUR"})
 	public ModelAndView listerBulletin() {
 		Map <BulletinSalaire, ResultatCalculRemuneration> list = new TreeMap<>();
 		bulletinSalaireRepository.findAll().forEach(bulletin -> list.put(bulletin, remunerationService.calculer(bulletin)));

@@ -35,6 +35,16 @@ public class RemunerationEmploye {
 
 	}
 	
+	public RemunerationEmploye(String matricule, Entreprise entreprise, ProfilRemuneration profilRemuneration,
+			Grade grade, LocalDateTime dateDeCreation) {
+		super();
+		this.matricule = matricule;
+		this.entreprise = entreprise;
+		this.profilRemuneration = profilRemuneration;
+		this.grade = grade;
+		this.dateDeCreation = dateDeCreation;
+	}
+
 	public String getMatricule() {
 		return matricule;
 	}

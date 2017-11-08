@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,13 +25,13 @@ import dev.paie.service.GradeService;
 @RequestMapping("/employes")
 public class RemunerationEmployeController {
 
-	@Autowired
-	RemunerationEmployeRepository remunerationEmployeRepository;
+	@Autowired RemunerationEmployeRepository remunerationEmployeRepository;
 	@Autowired EntrepriseRepository entrepriseRepository;
 	@Autowired GradeRepository gradeRepository;
 	@Autowired ProfilRemunerationRepository profilRemunerationRepository;
 
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public ModelAndView creerEmploye() {
 		List<Entreprise> listeEntreprise = entrepriseRepository.findAll();
 		List<Grade> listeGrade = gradeRepository.findAll();
@@ -45,6 +46,7 @@ public class RemunerationEmployeController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path ="/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public String submitForm(@RequestParam("matricule") String matricule, @RequestParam("entreprise") String entreprise, @RequestParam("profilRemuneration") String profil, @RequestParam("grade") String grade) {
 		RemunerationEmploye remuEmploye = new RemunerationEmploye();
 		remuEmploye.setDateDeCreation(LocalDateTime.now());
@@ -57,6 +59,7 @@ public class RemunerationEmployeController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/liste")
+	@Secured({"ROLE_ADMINISTRATEUR", "ROLE_UTILISATEUR"})
 	public ModelAndView listeEmploye() {
 		List<RemunerationEmploye> employes = remunerationEmployeRepository.findAll();
 		ModelAndView mv = new ModelAndView();

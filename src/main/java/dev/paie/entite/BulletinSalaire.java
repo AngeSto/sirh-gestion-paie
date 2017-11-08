@@ -33,6 +33,15 @@ public class BulletinSalaire implements Comparable<BulletinSalaire>{
 
 	}
 	
+	public BulletinSalaire(RemunerationEmploye remunerationEmploye, Periode periode, BigDecimal primeExceptionnelle,
+			LocalDateTime dateDeCreation) {
+		super();
+		this.remunerationEmploye = remunerationEmploye;
+		this.periode = periode;
+		this.primeExceptionnelle = primeExceptionnelle;
+		this.dateDeCreation = dateDeCreation;
+	}
+
 	public RemunerationEmploye getRemunerationEmploye() {
 		return remunerationEmploye;
 	}
