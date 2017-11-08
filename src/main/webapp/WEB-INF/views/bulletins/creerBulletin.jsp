@@ -2,6 +2,7 @@
 	contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -23,7 +24,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
-<title>Créer un employé</title>
+<title>Créer un bulletin</title>
 </head>
 
 <body class="container-fluid">
@@ -36,76 +37,51 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="./liste">Employés
-				</a> <a class="nav-item nav-link" href="../bulletins/liste">Bulletin</a>
+				<a class="nav-item nav-link" href="../employes/liste">Employés
+				</a> <a class="nav-item nav-link" href="./liste">Bulletin</a>
 			</div>
 		</div>
 	</nav>
-	<section>
-		<div class="row">
-			<div class="media col-10">
-				<a href="./liste" ><img class="d-flex align-self-center mr-3"
-					src="http://www.xn--icne-wqa.com/images/icones/1/7/aiga-left-arrow.png"
-					alt="Flèche noir" width="70px"></a>
-				<div class="media-body">
-					<h1 class="mt-0 text-center">Ajouter un employé</h1>
+	<h1 class="text-center">Créer un bulletin de salaire</h1>
+	<form:form method="post" modelAttribute="bulletin">
+			
+
+
+			<div class="form-group row">
+				<label for="inputPeriode" class="col-3 col-form-label text-right">Période</label>
+				<div class="col-5">
+					<form:select class="custom-select mb-3 col-5 mb-md-0"
+						id="selectPeriode" required="required" path="periode">
+						<option selected>Veuillez choisir</option>
+						<c:forEach items="${periodes}" var="periode">
+						<option value="${periode.id}">${periode.dateDebutFormat} - ${periode.dateFinFormat}</option>
+						</c:forEach>
+					</form:select>
 				</div>
 			</div>
-		</div>
-		<form:form method="post" modelAttribute="employe">
 			<div class="form-group row">
 				<label for="inputMatricule" class="col-3 col-form-label text-right">Matricule</label>
 				<div class="col-5">
-					<form:input type="text" class="form-control" id="inputMatricule"
-						placeholder="Matricule" path="matricule" required="required"/>
-				</div>
-			</div>
-
-
-			<div class="form-group row">
-				<label for="inputEntreprise" class="col-3 col-form-label text-right">Entreprise</label>
-				<div class="col-5">
-					<form:select class="custom-select mb-3 col-5 mb-md-0"
-						id="selectEntreprise" required="required" path="entreprise">
+					<form:select class="custom-select mb-3 col-5 mb-md-0" id="selectMatricule"
+						required="required" path="remunerationEmploye.matricule">
 						<option selected>Veuillez choisir</option>
-						<c:forEach items="${listeEntreprise}" var="entreprise">
-						<option>${entreprise.denomination}</option>
-						</c:forEach>
-						
-						
-					</form:select>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="inputProfil" class="col-3 col-form-label text-right">Profil</label>
-				<div class="col-5">
-					<form:select class="custom-select mb-3 col-5 mb-md-0" id="selectProfil"
-						required="required" path="profilRemuneration">
-						<option selected>Veuillez choisir</option>
-						<c:forEach items="${listeProfil}" var="profil">
-						<option>${profil.code}</option>
+						<c:forEach items="${employes}" var="employe">
+						<option>${employe.matricule}</option>
 						</c:forEach>
 					</form:select>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputGrade" class="col-3 col-form-label text-right">Grade</label>
+				<label for="inputPrime" class="col-3 col-form-label text-right">Prime exceptionnelle</label>
 				<div class="col-5">
-					<form:select class="custom-select mb-3 col-5 mb-md-0" id="selectGrade"
-						required="required" path="grade">
-						<option selected>Veuillez choisir</option>
-						<c:forEach items="${listeGrade}" var="grade">
-						<option>${grade.code}</option>
-						</c:forEach>
-					</form:select>
-					<div class="float-right">
-						<input type="submit" class="btn btn-primary" id="btnAjouter"
-							value="Ajouter">
+					<form:input type="number" class="form-control" id="inputPrime"
+						placeholder="Prime Exceptionnelle" path="primeExceptionnelle" required="required"/>
+						<div class="float-right">
+						<input type="submit" class="btn btn-primary" id="btnCreer"
+							value="Créer">
 					</div>
 				</div>
 			</div>
 		</form:form>
-	</section>
-</body>
-
-</html>
+	</body>
+	</html>

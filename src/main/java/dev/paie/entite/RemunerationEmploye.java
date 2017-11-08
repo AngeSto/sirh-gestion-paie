@@ -1,5 +1,8 @@
 package dev.paie.entite;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +28,8 @@ public class RemunerationEmploye {
 	@ManyToOne
 	@JoinColumn(name="ID_Grade")
 	private Grade grade;
+	@Column
+	private LocalDateTime dateDeCreation;
 	
 	public RemunerationEmploye() {
 
@@ -61,8 +66,24 @@ public class RemunerationEmploye {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	/**Getter for datedecreation
+	 * @return datedecreation
+	 */
+	public LocalDateTime getDateDeCreation() {
+		return dateDeCreation;
+	}
+
+	/**
+	 * @param datedecreation the datedecreation to set
+	 */
+	public void setDateDeCreation(LocalDateTime dateDeCreation) {
+		this.dateDeCreation = dateDeCreation;
+	}
 	
-	
+	public String getDateDeCreationFormat(){
+		return dateDeCreation.format(DateTimeFormatter.ofPattern("dd/MM/YYYY HH:mm:ss"));
+	}
 	
 	
 

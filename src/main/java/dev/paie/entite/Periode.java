@@ -1,6 +1,7 @@
 package dev.paie.entite;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,8 +47,13 @@ public class Periode {
 		this.id = id;
 	}
 	
+	public String getDateDebutFormat(){
+		return dateDebut.format(DateTimeFormatter.ofPattern("dd/MM/YYYY"));
+	}
 	
-	
+	public String getDateFinFormat(){
+		return dateFin.format(DateTimeFormatter.ofPattern("dd/MM/YYYY"));
+	}
 	
 
 }

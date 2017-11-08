@@ -36,6 +36,7 @@ public class JpaConfig {
 		factory.setDataSource(dataSource);
 		Properties jpaProperties = new Properties();
 		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "drop-and-create");
+		jpaProperties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 		factory.setJpaProperties(jpaProperties);
 		factory.afterPropertiesSet();
 		return factory.getObject();

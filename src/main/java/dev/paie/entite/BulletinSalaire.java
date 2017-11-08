@@ -1,6 +1,8 @@
 package dev.paie.entite;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class BulletinSalaire {
+public class BulletinSalaire implements Comparable<BulletinSalaire>{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,6 +26,8 @@ public class BulletinSalaire {
 	private Periode periode;
 	@Column
 	private BigDecimal primeExceptionnelle;
+	@Column
+	private LocalDateTime dateDeCreation;
 	
 	public BulletinSalaire() {
 
@@ -53,7 +57,37 @@ public class BulletinSalaire {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	/**Getter for dateDeCreation
+	 * @return dateDeCreation
+	 */
+	public LocalDateTime getDateDeCreation() {
+		return dateDeCreation;
+	}
+
+	/**
+	 * @param dateDeCreation the dateDeCreation to set
+	 */
+	public void setDateDeCreation(LocalDateTime dateDeCreation) {
+		this.dateDeCreation = dateDeCreation;
+	}
 	
+	public String getDateDeCreationFormat(){
+		return dateDeCreation.format(DateTimeFormatter.ofPattern("dd/MM/YYYY HH:mm:ss"));
+	}
+
+	@Override
+	public int compareTo(BulletinSalaire bulletinSalaire) {
+		if (this.id == bulletinSalaire.id){
+	    	return 0;
+	    }
+	    else if (this.id > bulletinSalaire.id){
+	    	return 1;
+	    }
+	    else {
+	    	return -1;
+	    }
 	
+	}
 	
 }
